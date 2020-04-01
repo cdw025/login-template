@@ -1,5 +1,6 @@
 cp .env.sample .env
-createdb sticker-mania
+psql -U postgres
+createdb [DATABASE NAME]
 npm install
 knex migrate:latest
 knex seed:run
