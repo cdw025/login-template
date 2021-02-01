@@ -69,7 +69,7 @@ router.post('/login', (req, res, next) => {
         User
         .getOneByEmail(req.body.email)
         .then(user => {
-            console.log('user', user);
+            // console.log('user', user);
             if(user) {
                 //compare password with hashed password
                 bcrypt.compare(req.body.password, user.password)
@@ -77,14 +77,20 @@ router.post('/login', (req, res, next) => {
                     // if the passwords matched
                     if(result) {
                         // setting the 'set-cookie' header
-                        const isSecure = req.app.get('env') === 'development';
-                        res.cookie('user_id', user.id, {
+                        const isSecure = req.app.get('env') != 'development';
+                        res.cookie('user_id', user.id, { 
+                            httpOnly: true,
+                            signed: true,
+                            secure : isSecure
+                        });
+                        res.cookie('company', user.company, {
                             httpOnly: true,
                             signed: true,
                             sameSite: 'strict'
                         });
                         res.json({
-                            id: user.id,
+                            id : user.id,
+                            company : user.company,
                             message: 'Logged In!'
                         });
                     } else {

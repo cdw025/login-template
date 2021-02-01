@@ -9,6 +9,19 @@ function ensureLoggedIn(req, res, next) {
     }
 }
 
+function ensureCorrectCompany(req, res, next) {
+    console.log(req.signedCookies);
+    if(req.signedCookies.company === req.params.company) {
+        next();
+    } else {
+        res.status(401);
+        next(new Error('Un-Authorized'));
+    }
+}
+
+
+
 module.exports = {
-    ensureLoggedIn
+    ensureLoggedIn,
+    ensureCorrectCompany
 };

@@ -6,7 +6,7 @@ module.exports = {
 
   development: {
     client: 'pg',
-    connection: 'postgres://postgres:postgres@localhost/stickermania'
+    connection: 'postgres://postgres:postgres@localhost/logintemplate'
   },
   production: {
     client: 'pg',

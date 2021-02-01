@@ -3,12 +3,13 @@ const router = express.Router();
 const User = require('../db/user');
 const Sticker = require('../db/sticker');
 
+
 router.get('/:id', (req, res) => {
   if (!isNaN(req.params.id)) {
     User.getOne(req.params.id).then(user => {
       if (user) {
         delete user.password;
-        res.json(user);
+        res.render('dashboard', { user : 'user', title : 'Eat My Butt' });
       } else {
         resError(res, 404, "User Not Found");
       }
