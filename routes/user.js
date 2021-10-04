@@ -9,7 +9,7 @@ router.get('/:id', (req, res) => {
     User.getOne(req.params.id).then(user => {
       if (user) {
         delete user.password;
-        res.render('dashboard', { user : 'user', title : 'Eat My Butt' });
+        res.render('dashboard', { user : 'user', title : 'Rentals' });
       } else {
         resError(res, 404, "User Not Found");
       }

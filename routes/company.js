@@ -9,7 +9,7 @@ router.get('/:company', (req, res) => {
     Company.getCompanyUsers(req.params.company).then(user => {
       if (user) {
         delete user.password;
-        res.render('dashboard', { 'user' : user, title : 'Eat My Butt' });
+        res.render('dashboard', { 'user' : user, title : 'Rentals' });
         // console.log(user);
       } else {
         resError(res, 404, "No Users");
@@ -20,7 +20,7 @@ router.get('/:company', (req, res) => {
       Company.getAllUsers().then(user => {
         if (user) {
           delete user.password;
-          res.render('dashboard', { 'user' : user, title : 'Eat My Butt' });
+          res.render('dashboard', { 'user' : user, title : 'Rentals' });
         // console.log(user);
         } 
       });
