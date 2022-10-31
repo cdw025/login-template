@@ -1,27 +1,14 @@
 var express = require('express');
 var router = express.Router();
-var authMiddleware = require('../auth/middleware');
+const currentLocations = require('../db/currentlocations');
+
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
-});
+router.get('/', async (req, res) => {
 
-router.get('/login', function(req, res, next) {
-  res.render('login', { title: 'Express' });
-});
+  const currentLocs = await currentLocations.getCurrentLocations();
 
-router.get('/signup', function(req, res, next) {
-  res.render('signup', { title: 'Express' });
-});
-
-router.get('/dashboard', authMiddleware.ensureLoggedIn, function(req, res) {
-  res.render('dashboard', { title: 'Express' });
-});
-
-router.get('/logout', function(req, res, next) {
-  res.clearCookie('user_id');
-  res.redirect('/login');
+  res.render('index', { title: 'Express', currentLocs : currentLocs });
 });
 
 module.exports = router;

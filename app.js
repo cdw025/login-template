@@ -30,10 +30,6 @@ app.use(express.static('public/clientjs'));
 app.use('/auth', auth);
 // any request that begins with / will go into the index router defined above (var index = require...)
 app.use('/', index);
-// any request that begins with /user will go into the user router defined above (var user = require...)
-app.use('/user', user);
-// any request that begins with /company will go into the company router defined above (var company = require...)
-app.use('/company', company);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
